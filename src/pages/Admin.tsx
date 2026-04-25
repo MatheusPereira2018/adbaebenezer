@@ -41,10 +41,10 @@ import {
   Trash2,
   ExternalLink,
   Star,
-  Sparkles,
   Home,
 } from "lucide-react";
 import { z } from "zod";
+import logo from "@/assets/ebenezer-logo.png";
 
 const videoSchema = z.object({
   title: z.string().trim().min(2, "Título muito curto").max(200),

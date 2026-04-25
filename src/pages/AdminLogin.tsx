@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Sparkles, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import { z } from "zod";
+import logo from "@/assets/ebenezer-logo.png";
 
 const schema = z.object({
   email: z.string().trim().email("Email inválido").max(255),
@@ -65,15 +66,14 @@ const AdminLogin = () => {
     <main className="flex min-h-screen items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mb-3 flex items-center justify-center gap-2">
-            <span className="h-px w-10 bg-gold/50" />
-            <Sparkles className="h-4 w-4 text-gold" />
-            <span className="h-px w-10 bg-gold/50" />
-          </div>
-          <h1 className="font-display text-3xl font-semibold tracking-[0.3em] text-gold">
-            EBENÉZER
-          </h1>
-          <p className="mt-2 text-xs uppercase tracking-[0.4em] text-muted-foreground">
+          <img
+            src={logo}
+            alt="Projeto Ebenezer"
+            width={600}
+            height={150}
+            className="mx-auto h-auto w-full max-w-[280px]"
+          />
+          <p className="mt-4 text-xs uppercase tracking-[0.4em] text-muted-foreground">
             Área Administrativa
           </p>
         </div>
