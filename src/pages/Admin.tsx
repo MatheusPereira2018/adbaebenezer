@@ -186,10 +186,10 @@ const Admin = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="goldOutline" size="sm" asChild>
               <Link to="/">
                 <Home className="h-4 w-4" />
-                <span className="hidden sm:inline">Ver site</span>
+                <span>Voltar ao site</span>
               </Link>
             </Button>
             <Button variant="ghost" size="sm" onClick={signOut}>
