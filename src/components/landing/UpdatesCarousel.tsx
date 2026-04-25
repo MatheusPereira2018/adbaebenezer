@@ -31,18 +31,18 @@ export const UpdatesCarousel = () => {
   return (
     <section
       id="atualizacoes"
-      className="relative border-t border-gold/15 bg-gradient-to-b from-background to-surface px-4 py-20 md:px-6 md:py-28"
+      className="relative border-t border-gold/15 bg-gradient-to-b from-background to-surface px-3 py-14 sm:px-4 sm:py-20 md:px-6 md:py-24"
     >
       <div className="container mx-auto max-w-7xl">
-        <div className="mb-12 text-center md:mb-16">
-          <span className="text-xs font-semibold uppercase tracking-[0.4em] text-gold">
+        <div className="mb-8 text-center sm:mb-12 md:mb-16">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-gold sm:text-xs sm:tracking-[0.4em]">
             Acompanhe a obra
           </span>
-          <h3 className="mt-4 font-display text-3xl font-medium text-foreground md:text-5xl">
+          <h3 className="mt-3 font-display text-2xl font-medium text-foreground sm:mt-4 sm:text-3xl md:text-5xl">
             Atualizações do Projeto
           </h3>
-          <div className="mx-auto mt-6 h-px w-16 bg-gold/40" />
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <div className="mx-auto mt-4 h-px w-12 bg-gold/40 sm:mt-6 sm:w-16" />
+          <p className="mx-auto mt-4 max-w-2xl px-4 text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base md:text-lg">
             Acompanhe os avanços, comunicados e novidades do Projeto Ebenezer.
           </p>
         </div>
