@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { useUpdateVideos } from "@/hooks/useVideos";
-import { getYouTubeThumbnail } from "@/lib/youtube";
 import { ChevronLeft, ChevronRight, PlayCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -91,26 +90,19 @@ export const UpdatesCarousel = () => {
                   key={v.id}
                   className="group surface-card flex w-[85vw] shrink-0 snap-start flex-col overflow-hidden rounded-2xl transition-[var(--transition-smooth)] hover:border-gold/50 hover:shadow-[var(--shadow-gold)] sm:w-[360px] md:w-[380px]"
                 >
-                  <a
-                    href={v.youtube_url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="relative block overflow-hidden"
+                  <div
+                    className="relative block overflow-hidden bg-black"
                     style={{ aspectRatio: "16 / 9" }}
                   >
-                    <img
-                      src={getYouTubeThumbnail(v.youtube_video_id)}
-                      alt={v.title}
+                    <iframe
+                      src={`https://www.youtube.com/embed/${v.youtube_video_id}?autoplay=1&mute=1&loop=1&playlist=${v.youtube_video_id}&controls=1&modestbranding=1&rel=0&playsinline=1`}
+                      title={v.title}
                       loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full border-0"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-90 transition-opacity group-hover:opacity-100">
-                      <div className="rounded-full bg-gold/95 p-4 text-primary-foreground shadow-[var(--shadow-gold)]">
-                        <PlayCircle className="h-7 w-7" />
-                      </div>
-                    </div>
-                  </a>
+                  </div>
 
                   <div className="flex flex-1 flex-col p-6">
                     <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-gold/80">
