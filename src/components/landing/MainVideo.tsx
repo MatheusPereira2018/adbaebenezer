@@ -115,7 +115,7 @@ export const MainVideo = () => {
               </div>
             ) : video ? (
               <>
-                <div ref={containerRef} className="h-full w-full" />
+                <div ref={containerRef} className="absolute inset-0 h-full w-full [&>iframe]:h-full [&>iframe]:w-full [&>div]:h-full [&>div]:w-full" />
                 {/* Botão mutar/desmutar */}
                 {ready && (
                   <button
