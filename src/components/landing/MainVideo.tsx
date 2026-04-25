@@ -37,10 +37,12 @@ export const MainVideo = () => {
       if (cancelled || !containerRef.current) return;
 
       // Limpa container antes de criar o player
-      containerRef.current.innerHTML = '<div id="ebenezer-yt-player"></div>';
+      containerRef.current.innerHTML = '<div id="ebenezer-yt-player" style="width:100%;height:100%"></div>';
 
       // @ts-expect-error - YT global
       playerRef.current = new window.YT.Player("ebenezer-yt-player", {
+        width: "100%",
+        height: "100%",
         videoId: video.youtube_video_id,
         playerVars: {
           autoplay: 1,
