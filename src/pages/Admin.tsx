@@ -41,10 +41,10 @@ import {
   Trash2,
   ExternalLink,
   Star,
-  Sparkles,
   Home,
 } from "lucide-react";
 import { z } from "zod";
+import logo from "@/assets/ebenezer-logo.png";
 
 const videoSchema = z.object({
   title: z.string().trim().min(2, "Título muito curto").max(200),
@@ -172,11 +172,14 @@ const Admin = () => {
       <header className="border-b border-gold/20 bg-surface/80 backdrop-blur">
         <div className="container mx-auto flex items-center justify-between px-6 py-5">
           <div className="flex items-center gap-3">
-            <Sparkles className="h-5 w-5 text-gold" />
-            <div>
-              <h1 className="font-display text-xl font-semibold tracking-[0.25em] text-gold">
-                EBENÉZER
-              </h1>
+            <img
+              src={logo}
+              alt="Projeto Ebenezer"
+              width={300}
+              height={75}
+              className="h-10 w-auto"
+            />
+            <div className="hidden sm:block border-l border-gold/30 pl-3">
               <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
                 Painel administrativo
               </p>

@@ -1,5 +1,6 @@
 import { Sparkles } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import logo from "@/assets/ebenezer-logo.png";
 
 export const Hero = () => {
   return (
@@ -17,26 +18,22 @@ export const Hero = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-6 pb-16 pt-24 text-center md:pb-24 md:pt-32">
-        {/* Marca */}
-        <div className="mb-3 flex items-center justify-center gap-2 animate-fade-in">
+        {/* Logo Ebenezer */}
+        <div className="mx-auto flex max-w-2xl justify-center animate-fade-in">
+          <img
+            src={logo}
+            alt="Projeto Ebenezer – Juntos Mais Além"
+            width={1200}
+            height={300}
+            className="h-auto w-full max-w-xl drop-shadow-[0_8px_30px_hsl(var(--gold)/0.35)]"
+          />
+        </div>
+
+        <div className="mt-3 flex items-center justify-center gap-2 animate-fade-in">
           <span className="h-px w-10 bg-gold/50" />
           <Sparkles className="h-4 w-4 text-gold" />
           <span className="h-px w-10 bg-gold/50" />
         </div>
-
-        <h2
-          className="font-display text-4xl font-semibold tracking-[0.35em] text-gold md:text-5xl animate-fade-up opacity-0"
-          style={{ animationDelay: "0.1s" }}
-        >
-          EBENÉZER
-        </h2>
-
-        <p
-          className="mt-3 text-sm font-light uppercase tracking-[0.45em] text-muted-foreground animate-fade-up opacity-0"
-          style={{ animationDelay: "0.25s" }}
-        >
-          Juntos Mais Além
-        </p>
 
         <div className="mx-auto mt-10 max-w-3xl">
           <h1
