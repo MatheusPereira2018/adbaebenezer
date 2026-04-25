@@ -36,13 +36,7 @@ export const Hero = () => {
         </div>
 
         <div className="mx-auto mt-6 max-w-3xl sm:mt-10">
-          <h1
-            className="font-display text-3xl font-medium leading-tight text-foreground sm:text-4xl md:text-6xl animate-fade-up opacity-0"
-            style={{ animationDelay: "0.4s" }}
-          >
-            Projeto Ebenezer
-            <span className="block gold-text">Juntos Mais Além</span>
-          </h1>
+          <h1 className="sr-only">Projeto Ebenezer — Juntos Mais Além</h1>
 
           <p
             className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mt-6 sm:text-base md:text-lg animate-fade-up opacity-0"
