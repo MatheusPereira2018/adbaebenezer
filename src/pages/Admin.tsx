@@ -81,12 +81,15 @@ const Admin = () => {
   const [submitting, setSubmitting] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
+  const mainVideos = videos.filter((v) => v.type === "principal");
+  const updateVideosList = videos.filter((v) => v.type === "atualizacao");
+
   if (!loading && (!session || !isAdmin)) {
     return <Navigate to="/admin/login" replace />;
   }
 
-  const openNew = () => {
-    setForm(emptyForm);
+  const openNew = (type: "principal" | "atualizacao" = "atualizacao") => {
+    setForm({ ...emptyForm, type });
     setDialogOpen(true);
   };
 
