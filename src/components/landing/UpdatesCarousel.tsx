@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { useUpdateVideos } from "@/hooks/useVideos";
-import { getYouTubeThumbnail } from "@/lib/youtube";
 import { ChevronLeft, ChevronRight, PlayCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
