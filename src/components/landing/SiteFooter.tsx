@@ -1,8 +1,10 @@
 import logo from "@/assets/ebenezer-logo.png";
+import { Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const SiteFooter = () => {
   return (
-    <footer className="border-t border-gold/15 bg-surface px-6 py-12">
+    <footer className="relative border-t border-gold/15 bg-surface px-6 py-12">
       <div className="container mx-auto max-w-4xl text-center">
         <img
           src={logo}
@@ -20,6 +22,15 @@ export const SiteFooter = () => {
           reservados.
         </p>
       </div>
+
+      <Link
+        to="/admin/login"
+        aria-label="Acessar painel administrativo"
+        title="Painel administrativo"
+        className="absolute bottom-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 bg-background/60 text-muted-foreground/70 backdrop-blur transition hover:border-gold/60 hover:text-gold active:scale-95"
+      >
+        <Settings className="h-4 w-4" />
+      </Link>
     </footer>
   );
 };
