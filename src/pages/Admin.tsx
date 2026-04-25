@@ -81,12 +81,15 @@ const Admin = () => {
   const [submitting, setSubmitting] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
+  const mainVideos = videos.filter((v) => v.type === "principal");
+  const updateVideosList = videos.filter((v) => v.type === "atualizacao");
+
   if (!loading && (!session || !isAdmin)) {
     return <Navigate to="/admin/login" replace />;
   }
 
-  const openNew = () => {
-    setForm(emptyForm);
+  const openNew = (type: "principal" | "atualizacao" = "atualizacao") => {
+    setForm({ ...emptyForm, type });
     setDialogOpen(true);
   };
 
@@ -200,20 +203,14 @@ const Admin = () => {
         </div>
       </header>
 
-      <div className="container mx-auto max-w-6xl px-6 py-10">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="font-display text-3xl font-medium text-foreground">
-              Gerenciar vídeos
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Adicione, edite ou remova vídeos da página pública.
-            </p>
-          </div>
-          <Button variant="gold" onClick={openNew}>
-            <Plus className="h-4 w-4" />
-            Novo vídeo
-          </Button>
+      <div className="container mx-auto max-w-6xl space-y-12 px-6 py-10">
+        <div>
+          <h2 className="font-display text-3xl font-medium text-foreground">
+            Gerenciar vídeos
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Adicione, edite ou remova vídeos da página pública.
+          </p>
         </div>
 
         {isLoading ? (
@@ -225,83 +222,90 @@ const Admin = () => {
               />
             ))}
           </div>
-        ) : videos.length === 0 ? (
-          <div className="surface-card rounded-2xl p-12 text-center">
-            <p className="text-muted-foreground">
-              Nenhum vídeo cadastrado. Clique em "Novo vídeo" para começar.
-            </p>
-          </div>
         ) : (
-          <div className="space-y-3">
-            {videos.map((v) => (
-              <div
-                key={v.id}
-                className="surface-card flex flex-col gap-4 rounded-xl p-4 transition hover:border-gold/40 sm:flex-row sm:items-center"
-              >
-                <img
-                  src={getYouTubeThumbnail(v.youtube_video_id)}
-                  alt=""
-                  loading="lazy"
-                  className="h-20 w-32 shrink-0 rounded-lg object-cover"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    {v.type === "principal" ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold">
-                        <Star className="h-3 w-3" />
-                        Principal
-                      </span>
-                    ) : (
-                      <span className="inline-flex rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                        Atualização
-                      </span>
-                    )}
-                    <span className="text-xs text-muted-foreground">
-                      {new Date(v.update_date + "T00:00:00").toLocaleDateString(
-                        "pt-BR",
-                      )}
-                    </span>
+          <>
+            {/* SEÇÃO 1: VÍDEO PRINCIPAL */}
+            <section>
+              <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-gold/20 pb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Star className="h-4 w-4 text-gold" />
+                    <h3 className="font-display text-xl font-medium text-foreground">
+                      Vídeo Principal
+                    </h3>
                   </div>
-                  <h3 className="mt-1 truncate font-medium text-foreground">
-                    {v.title}
-                  </h3>
-                  {v.description && (
-                    <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
-                      {v.description}
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Aparece em destaque no topo da página.
+                  </p>
+                </div>
+                <Button variant="goldOutline" size="sm" onClick={() => openNew("principal")}>
+                  <Plus className="h-4 w-4" />
+                  {mainVideos.length > 0 ? "Trocar vídeo principal" : "Adicionar vídeo principal"}
+                </Button>
+              </div>
+
+              {mainVideos.length === 0 ? (
+                <div className="surface-card rounded-xl p-8 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    Nenhum vídeo principal cadastrado ainda.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {mainVideos.map((v) => (
+                    <VideoRowItem
+                      key={v.id}
+                      video={v}
+                      onEdit={openEdit}
+                      onDelete={setDeleteId}
+                    />
+                  ))}
+                  {mainVideos.length > 1 && (
+                    <p className="text-xs text-muted-foreground">
+                      ⓘ Quando há mais de um vídeo principal, o mais recente é exibido na página.
                     </p>
                   )}
                 </div>
-                <div className="flex items-center gap-1">
-                  <Button variant="ghost" size="icon" asChild>
-                    <a
-                      href={v.youtube_url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      title="Abrir no YouTube"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => openEdit(v)}
-                    title="Editar"
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setDeleteId(v.id)}
-                    title="Excluir"
-                  >
-                    <Trash2 className="h-4 w-4 text-destructive" />
-                  </Button>
+              )}
+            </section>
+
+            {/* SEÇÃO 2: TIMELINE DE ATUALIZAÇÕES */}
+            <section>
+              <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-gold/20 pb-4">
+                <div>
+                  <h3 className="font-display text-xl font-medium text-foreground">
+                    Vídeos da Timeline
+                  </h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Aparecem no carrossel de "Atualizações do Projeto".
+                  </p>
                 </div>
+                <Button variant="gold" size="sm" onClick={() => openNew("atualizacao")}>
+                  <Plus className="h-4 w-4" />
+                  Nova atualização
+                </Button>
               </div>
-            ))}
-          </div>
+
+              {updateVideosList.length === 0 ? (
+                <div className="surface-card rounded-xl p-8 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    Nenhuma atualização cadastrada ainda.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {updateVideosList.map((v) => (
+                    <VideoRowItem
+                      key={v.id}
+                      video={v}
+                      onEdit={openEdit}
+                      onDelete={setDeleteId}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+          </>
         )}
       </div>
 
