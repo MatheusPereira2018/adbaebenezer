@@ -9,8 +9,8 @@ const priorities = [
 
 export const Institutional = () => {
   return (
-    <section className="px-6 py-20 md:py-28">
-      <div className="container mx-auto max-w-4xl space-y-24">
+    <section className="px-5 py-14 sm:px-6 sm:py-20 md:py-28">
+      <div className="container mx-auto max-w-4xl space-y-16 sm:space-y-24">
         {/* Visão */}
         <div className="text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.4em] text-gold">
