@@ -428,4 +428,79 @@ const Admin = () => {
   );
 };
 
+type VideoRowItemProps = {
+  video: VideoRow;
+  onEdit: (v: VideoRow) => void;
+  onDelete: (id: string) => void;
+};
+
+function VideoRowItem({ video: v, onEdit, onDelete }: VideoRowItemProps) {
+  return (
+    <div className="surface-card flex flex-col gap-3 rounded-xl p-3 transition hover:border-gold/40 sm:flex-row sm:items-center sm:gap-4 sm:p-4">
+      <img
+        src={getYouTubeThumbnail(v.youtube_video_id)}
+        alt=""
+        loading="lazy"
+        className="h-40 w-full shrink-0 rounded-lg object-cover sm:h-20 sm:w-32"
+      />
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          {v.type === "principal" ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-gold/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold">
+              <Star className="h-3 w-3" />
+              Principal
+            </span>
+          ) : (
+            <span className="inline-flex rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Atualização
+            </span>
+          )}
+          <span className="text-xs text-muted-foreground">
+            {new Date(v.update_date + "T00:00:00").toLocaleDateString("pt-BR")}
+          </span>
+        </div>
+        <h3 className="mt-1 line-clamp-2 font-medium text-foreground sm:truncate">
+          {v.title}
+        </h3>
+        {v.description && (
+          <p className="mt-1 line-clamp-2 text-sm text-muted-foreground sm:line-clamp-1">
+            {v.description}
+          </p>
+        )}
+      </div>
+      <div className="flex items-center justify-end gap-1 border-t border-border pt-2 sm:border-0 sm:pt-0">
+        <Button variant="ghost" size="icon" asChild>
+          <a
+            href={v.youtube_url}
+            target="_blank"
+            rel="noreferrer noopener"
+            title="Abrir no YouTube"
+            aria-label="Abrir no YouTube"
+          >
+            <ExternalLink className="h-4 w-4" />
+          </a>
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onEdit(v)}
+          title="Editar"
+          aria-label="Editar"
+        >
+          <Pencil className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onDelete(v.id)}
+          title="Excluir"
+          aria-label="Excluir"
+        >
+          <Trash2 className="h-4 w-4 text-destructive" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export default Admin;
